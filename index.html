@@ -9,7 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Scale to the device width -->
   <title>Jason Gentile | Personal Page</title>
-  <!-- TODO: put your own name in the title -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap">
@@ -26,9 +25,12 @@
     <img class="avatar" src="images/avatar.svg" alt="Pixel-art portrait of Jason with brown hair and a blue shirt" width="128" height="128">
     <!-- 16x16 sprite scaled up; CSS keeps the pixels crisp -->
     <h1>Jason Gentile</h1>
-    <p>I am a passionate web developer with a love for creating engaging user experiences.</p>
+    <p>I am a passionate software developer with a love for creating engaging user experiences.</p>
     <p class="press-start">&#9654; PRESS START</p>
     <!-- Decorative blinking prompt -->
+    <button type="button" id="theme-toggle">Light mode</button>
+    
+    <!-- script.js toggles the .light class on body and swaps this text -->
   </header>
   <!-- End of header -->
   <div class="ticker" aria-hidden="true">
@@ -37,7 +39,7 @@
   </div>
   <!-- End of ticker -->
   <nav>
-    <!-- TODO: add a ul with at least three links to sections on this page -->
+    <!-- Links to each section on this page -->
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
@@ -48,7 +50,7 @@
   </nav>
   <!-- End of nav -->
   <main>
-    <!-- TODO: add at least two section elements, each with an id and an h2 -->
+    <!-- Each section is a panel linked from the nav -->
     <section id="about">
       <h2>About Me</h2>
       <p>Learn more about my background and interests.</p>
@@ -62,11 +64,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td>Machine Learning</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617; 5</td></tr>
-          <tr><td>NLP &amp; RAG</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617; 5</td></tr>
-          <tr><td>Anomaly Detection</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617; 6</td></tr>
-          <tr><td>System Architecture</td><td>&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617; 4</td></tr>
-          <tr><td>Web Development</td><td>&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;&#9617; 3</td></tr>
+          <!-- Bars are aria-hidden so screen readers read only the score -->
+          <tr><td>Machine Learning</td><td><span class="bar" aria-hidden="true">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;</span> 7/10</td></tr>
+          <tr><td>NLP &amp; RAG</td><td><span class="bar" aria-hidden="true">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;</span> 7/10</td></tr>
+          <tr><td>Anomaly Detection</td><td><span class="bar" aria-hidden="true">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;</span> 9/10</td></tr>
+          <tr><td>System Architecture</td><td><span class="bar" aria-hidden="true">&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;&#9617;</span> 6/10</td></tr>
+          <tr><td>Web Development</td><td><span class="bar" aria-hidden="true">&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;&#9617;&#9617;&#9617;</span> 4/10</td></tr>
         </tbody>
       </table>
       <!-- End of stats table -->
@@ -75,9 +78,10 @@
       <h2>Projects</h2>
       <p>Explore my work on Novobot, the A/RED Rare Category Anomaly Detection Algorithm Graphical User Interface, the Archy programming language, and other projects.</p>
       <ul>
-        <li><a href="Novobot.html">Novobot</a></li>
-        <li><a href="ARED.html">A/RED</a></li>
-        <li><a href="Archy.html">Archy</a></li>
+        <!-- Plain text until each project has its own page -->
+        <li>Novobot</li>
+        <li>A/RED</li>
+        <li>Archy</li>
       </ul>
     </section>
     <section id="research">
@@ -90,36 +94,54 @@
     <section id="blog">
       <h2>Blog</h2>
       <p>Read my latest blog posts on cutting edge AI systems (ML, NLP, RAG, Agents, Anomaly Detection), operating systems (Omarchy, MacOSX), human-centered computing, system architecture, and economics.</p>
+      <div class="topic-controls">
+        <!-- Search box and category buttons that filter the topic list -->
+        <label for="topic-search">Search topics</label>
+        <input type="search" id="topic-search" name="topic_search" autocomplete="off">
+        <div class="filter-buttons" id="category-filters">
+          <!-- data-category tells script.js which topics each button shows -->
+          <button type="button" data-category="All" aria-pressed="true">All</button>
+          <button type="button" data-category="AI" aria-pressed="false">AI</button>
+          <button type="button" data-category="Operating Systems" aria-pressed="false">Operating Systems</button>
+          <button type="button" data-category="Computing" aria-pressed="false">Computing</button>
+          <button type="button" data-category="Economics" aria-pressed="false">Economics</button>
+        </div>
+      </div>
+      <p id="topic-count" class="topic-count" aria-live="polite"></p>
+      <!-- script.js writes "Showing X of Y" here -->
+      <ul id="topic-list" class="topic-list"></ul>
+      <!-- script.js builds the list items here -->
     </section>
-    <!-- TODO: include an ordered or unordered list, an image with alt text, and either a table or a form -->
     <section id="contact">
       <h2>Sign My Guestbook</h2>
       <p>Leave a message and say hi!</p>
-      <form id="message-form">
+      <form id="message-form" novalidate>
         <!-- Ids match the Thursday starter so script.js can use this form -->
+        <!-- novalidate lets script.js show its own error instead of the browser's popup -->
         <label for="sender-name">Your name</label>
         <input type="text" id="sender-name" name="sender_name" required>
         <label for="sender-message">Message</label>
         <textarea id="sender-message" name="sender_message" rows="4" required></textarea>
+        <p id="form-error" class="form-error" role="alert"></p>
+        <!-- script.js writes an error here when the input is invalid -->
         <button type="submit">Send</button>
       </form>
       <!-- End of form -->
-      <p id="form-summary"></p>
+      <p id="form-summary" class="form-summary" aria-live="polite"></p>
       <!-- Thursday: JavaScript writes a summary here -->
     </section>
   </main>
   <!-- End of main -->
   <footer>
-    <!-- TODO: add a footer with a link to your GitHub profile -->
+    <!-- Link to my GitHub profile -->
     <p>Connect with me on <a href="https://github.com/jlg-repo">GitHub</a></p>
     <ul class="badges">
       <!-- 88x31-style web badges, a classic personal-site touch -->
       <li>HTML5</li>
       <li>CSS3</li>
-      <li>NO AI SLOP</li>
       <li>BEST VIEWED 800&times;600</li>
     </ul>
-    <p class="copyright">&copy; 2026 Jason Gentile &middot; Made with &#9829; and pixels</p>
+    <p class="copyright">2026 Jason Gentile</p>
   </footer>
   <!-- End of footer -->
 </body>

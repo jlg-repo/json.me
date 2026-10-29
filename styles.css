@@ -13,33 +13,81 @@
   --pink: #ff77a8;            /* heading accents; about 5.5:1 on navy */
   --cyan: #29adff;            /* table headers */
   --green: #00e436;           /* buttons and stat bars */
+
+  /* Light mode palette: cream paper */
+  --paper: #fdf8ec;           /* page background */
+  --cream: #fffdf7;           /* panel background */
+  --ivory: #faf3e1;           /* header and footer bands */
+  --paper-star: #e8dfca;      /* faint dots on the paper */
+  --paper-star-2: #efe8d6;
+  --slate: #4b5563;           /* muted text on ivory */
+  --sky: #a9d6f5;             /* soft blue shadow behind the light-mode title */
+  --berry: #be1250;           /* headings; a darker pink that passes on cream */
+  --leaf: #306230;            /* Game Boy dark green for text on light backgrounds */
+
   --pixel-font: "Press Start 2P", "Courier New", monospace;  /* chunky headings */
   --body-font: "VT323", "Courier New", monospace;            /* terminal-style body text */
+
+  /* Theme roles: rules below use these, so a theme only has to change this list */
+  color-scheme: dark;         /* dark scrollbars and form controls */
+  --page-bg: var(--night);
+  --star: var(--white);
+  --star-2: var(--gray);
+  --panel-bg: var(--navy);
+  --band-bg: var(--black);    /* header and footer */
+  --text: var(--white);
+  --muted: var(--gray);
+  --frame: var(--white);      /* panel, avatar, and badge borders */
+  --highlight: var(--yellow); /* links, heading stars, focus rings */
+  --title: var(--yellow);     /* my name in the header */
+  --title-shadow: var(--plum);
+  --heading: var(--pink);
+  --accent: var(--green);     /* prompt, list markers, stat bars */
+  --error: var(--pink);
 }
 
-/* TODO 1: add a * rule that sets box-sizing: border-box */
+/* ----- Light mode: script.js toggles this class on body ----- */
+.light {
+  color-scheme: light;        /* light scrollbars and form controls */
+  --page-bg: var(--paper);
+  --star: var(--paper-star);
+  --star-2: var(--paper-star-2);
+  --panel-bg: var(--cream);
+  --band-bg: var(--ivory);
+  --text: var(--navy);
+  --muted: var(--slate);
+  --frame: var(--navy);
+  --highlight: var(--plum);
+  --title: var(--navy);
+  --title-shadow: var(--sky);
+  --heading: var(--berry);
+  --accent: var(--leaf);
+  --error: var(--berry);
+}
+
+/* Every element uses border-box sizing */
 * {
   box-sizing: border-box;     /* width includes padding and border */
 }
 
-/* TODO 2: style body with a font-family, a readable font-size, line-height, color, and background-color */
+/* ----- Page ----- */
 body {
   margin: 0;                  /* removes the browser's default margin */
   font-family: var(--body-font);  /* pixel font stack with monospace fallbacks */
   font-size: 1.5rem;          /* VT323 runs small, so it needs a larger size to stay readable */
   line-height: 1.3;           /* space between lines */
-  color: var(--white);        /* light text */
-  background-color: var(--night);  /* dark space background */
+  color: var(--text);         /* main text color for the current theme */
+  background-color: var(--page-bg);  /* night sky, or paper in light mode */
   background-image:           /* two layers of tiny dots make a starfield */
-    radial-gradient(var(--white) 1px, transparent 1px),
-    radial-gradient(var(--gray) 1px, transparent 1px);
+    radial-gradient(var(--star) 1px, transparent 1px),
+    radial-gradient(var(--star-2) 1px, transparent 1px);
   background-size: 120px 120px, 70px 70px;  /* different tile sizes so the stars do not line up */
   background-position: 0 0, 35px 50px;      /* offsets the second layer */
 }
 
-/* TODO 3: use display: flex on your nav list and give it a gap */
+/* ----- Navigation: a flex row of links ----- */
 nav {
-  background-color: var(--plum);  /* nav band color */
+  background-color: var(--plum);  /* nav band color, the same in both themes */
   border-top: 4px solid var(--black);     /* chunky pixel edges */
   border-bottom: 4px solid var(--black);
   padding: 0.75rem 1rem;      /* space inside the nav */
@@ -54,31 +102,31 @@ nav ul {
   list-style: none;           /* removes bullets */
 }
 
-/* TODO 4: give each section padding, a border, and margin-bottom (the box model) */
+/* ----- Panels: padding, border, and margin (the box model) ----- */
 section {
-  background-color: var(--navy);       /* panel background */
-  border: 4px solid var(--white);      /* thick, square, pixel-style border */
+  background-color: var(--panel-bg);   /* panel background */
+  border: 4px solid var(--frame);      /* thick, square, pixel-style border */
   box-shadow: 8px 8px 0 var(--black);  /* hard drop shadow with no blur, like a sprite */
   padding: 1.5rem;                     /* space between border and content */
   margin-bottom: 2.5rem;               /* space between panels (extra room for the shadow) */
 }
 
-/* TODO 5: see the @media (max-width: 700px) rule at the bottom of this file.
-   It sits last so it can override the header and main rules below it. */
+/* The @media (max-width: 700px) rule sits at the bottom of this file
+   so it can override the header and main rules below. */
 
 /* ===== Retro theme extras ===== */
 
 /* ----- Header ----- */
 header {
-  background-color: var(--black);  /* solid black title screen */
+  background-color: var(--band-bg);  /* solid title screen band */
   text-align: center;         /* centers the avatar and text */
   padding: 2rem 1rem 1.5rem;  /* space inside the header */
 }
 header h1 {
   font-family: var(--pixel-font);  /* chunky pixel heading */
   font-size: 2rem;            /* heading size */
-  color: var(--yellow);       /* bright title color */
-  text-shadow: 4px 4px 0 var(--plum);  /* offset shadow with no blur, like an arcade title */
+  color: var(--title);        /* yellow at night, navy on cream */
+  text-shadow: 4px 4px 0 var(--title-shadow);  /* offset shadow with no blur, like an arcade title */
   margin: 1rem 0;             /* space around the heading */
 }
 header h1::after {
@@ -88,13 +136,13 @@ header h1::after {
 .avatar {
   image-rendering: pixelated; /* keeps scaled-up pixels sharp instead of blurry */
   background-color: var(--navy);  /* fills the transparent pixels */
-  border: 4px solid var(--white);  /* frame around the sprite */
+  border: 4px solid var(--frame);  /* frame around the sprite */
   box-shadow: 6px 6px 0 var(--plum);  /* hard shadow */
 }
 .press-start {
   font-family: var(--pixel-font);  /* pixel font */
   font-size: 0.75rem;         /* small prompt text */
-  color: var(--green);        /* green prompt */
+  color: var(--accent);       /* green prompt */
   animation: blink 1.2s steps(1) infinite;  /* blinks like a game title screen */
 }
 
@@ -116,7 +164,7 @@ header h1::after {
 
 /* ----- Links ----- */
 a {
-  color: var(--yellow);       /* bright links on the dark panels */
+  color: var(--highlight);    /* stands out from the body text */
 }
 a:hover,
 a:focus-visible {
@@ -128,6 +176,7 @@ a:focus-visible {
 nav a {
   font-family: var(--pixel-font);  /* menu items use the pixel font */
   font-size: 0.75rem;         /* pixel font reads large, so keep it small */
+  color: var(--yellow);       /* the nav band stays plum, so its links stay yellow */
   text-decoration: none;      /* menu items, not underlined links */
   padding: 0.25rem 0.5rem;    /* room for the hover highlight */
 }
@@ -149,19 +198,19 @@ main {
 h2 {
   font-family: var(--pixel-font);  /* pixel headings */
   font-size: 1rem;            /* pixel font is wide, so keep headings modest */
-  color: var(--pink);         /* accent color */
+  color: var(--heading);      /* accent color */
   margin-top: 0;              /* panel padding already gives space above */
 }
 h2::before {
   content: "\2605 ";          /* ★ before each heading */
-  color: var(--yellow);       /* yellow star */
+  color: var(--highlight);    /* yellow star (plum in light mode) */
 }
 ul {
   padding-left: 1.5rem;       /* indent for the custom markers */
 }
 main li::marker {
   content: "\25BA  ";         /* ► arrow instead of a round bullet */
-  color: var(--green);        /* green arrow */
+  color: var(--accent);       /* green arrow */
 }
 
 /* ----- Stats table ----- */
@@ -173,7 +222,7 @@ main li::marker {
 .stats caption {
   font-family: var(--pixel-font);  /* pixel caption */
   font-size: 0.75rem;         /* small caption */
-  color: var(--pink);         /* accent color */
+  color: var(--heading);      /* accent color */
   text-align: left;           /* aligns with the panel text */
   margin-bottom: 0.5rem;      /* space under the caption */
 }
@@ -190,12 +239,50 @@ main li::marker {
   border-bottom: 2px dashed var(--plum);  /* dashed row dividers */
 }
 .stats td:last-child {
-  color: var(--green);        /* green "health bar" style levels */
+  color: var(--accent);       /* green "health bar" style levels */
   white-space: nowrap;        /* keeps each bar on one line */
+}
+.stats .bar {
+  font-size: 0.75rem;         /* 10 small cells */
+  vertical-align: middle;     /* lines the bar up with the score */
+}
+
+/* ----- Blog topic list ----- */
+.filter-buttons {
+  display: flex;              /* buttons sit in a row */
+  flex-wrap: wrap;            /* wrap on narrow screens */
+  gap: 0.75rem;               /* room for each button's hard shadow */
+  margin-top: 0.5rem;         /* space under the search box */
+}
+.filter-buttons button {
+  font-size: 0.625rem;        /* smaller than the main buttons so the row fits */
+  padding: 0.5rem 0.75rem;
+}
+.filter-buttons button[aria-pressed="true"] {
+  background-color: var(--cyan);   /* the selected filter stays lit */
+}
+.topic-count {
+  font-family: var(--pixel-font);  /* reads like a game score */
+  font-size: 0.625rem;
+  color: var(--accent);       /* green like the stat bars */
+  margin: 1.5rem 0 0.5rem;    /* space above and below the count */
+}
+.topic-list {
+  margin: 0;                  /* the count already spaces it */
+}
+.topic-tag {
+  font-family: var(--pixel-font);  /* small pixel label */
+  font-size: 0.625rem;
+  color: var(--muted);        /* quieter than the topic name */
+  border: 2px solid currentColor;  /* border matches the text color */
+  padding: 0.125rem 0.375rem; /* space inside the tag */
+  margin-left: 0.5rem;        /* space after the topic name */
+  vertical-align: middle;     /* lines up with the larger body text */
 }
 
 /* ----- Guestbook form ----- */
-form {
+form,
+.topic-controls {
   display: flex;              /* stacks the labels and fields */
   flex-direction: column;     /* one item per row */
   gap: 0.5rem;                /* space between rows */
@@ -211,7 +298,22 @@ textarea {
 }
 input:focus,
 textarea:focus {
-  outline: 4px solid var(--yellow);  /* bright focus ring */
+  outline: 4px solid var(--highlight);  /* bright focus ring */
+}
+.form-error {
+  color: var(--error);        /* error text stands out from normal text */
+  margin: 0;                  /* the form's gap already spaces it */
+}
+.form-error:empty {
+  display: none;              /* takes no space until script.js writes an error */
+}
+.form-summary {
+  border: 4px dashed var(--accent);  /* dashed green box, like a save-game message */
+  padding: 0.75rem;           /* space inside the box */
+  margin: 1.5rem 0 0;         /* space above, below the form */
+}
+.form-summary:empty {
+  display: none;              /* hidden until a message is sent */
 }
 button {
   align-self: flex-start;     /* button stays its natural width */
@@ -227,6 +329,10 @@ button {
 button:hover {
   background-color: var(--yellow);  /* lights up on hover */
 }
+button:focus-visible {
+  outline: 4px solid var(--highlight);  /* keyboard focus ring */
+  outline-offset: 4px;        /* clears the hard shadow */
+}
 button:active {
   transform: translate(4px, 4px);  /* moves into the shadow so it looks pressed */
   box-shadow: none;           /* shadow disappears while pressed */
@@ -234,8 +340,8 @@ button:active {
 
 /* ----- Footer ----- */
 footer {
-  background-color: var(--black);  /* black band to match the header */
-  color: var(--gray);         /* muted text */
+  background-color: var(--band-bg);  /* band to match the header */
+  color: var(--muted);        /* muted text */
   text-align: center;         /* centers footer content */
   padding: 1.5rem 1rem;       /* space inside the footer */
   border-top: 4px solid var(--plum);  /* pixel edge */
@@ -259,12 +365,11 @@ footer {
   font-size: 0.4rem;          /* tiny text to fit the badge */
   line-height: 1.4;           /* tight lines for two-line badges */
   color: var(--black);        /* dark text on bright badges */
-  border: 2px solid var(--white);  /* light badge frame */
+  border: 2px solid var(--frame);  /* badge frame */
 }
 .badges li:nth-child(1) { background-color: var(--pink); }    /* each badge gets its own color */
 .badges li:nth-child(2) { background-color: var(--cyan); }
-.badges li:nth-child(3) { background-color: var(--green); }
-.badges li:nth-child(4) { background-color: var(--yellow); }
+.badges li:nth-child(3) { background-color: var(--yellow); }
 .copyright {
   font-size: 1.125rem;        /* smaller footer text */
 }
@@ -277,7 +382,7 @@ footer {
   to { transform: translateX(-100%); }  /* slides the text its full width to the left */
 }
 
-/* TODO 5: add one @media (max-width: 700px) rule that stacks your nav links vertically */
+/* ----- Small screens: stack the nav links vertically ----- */
 @media (max-width: 700px) {
   nav ul {
     flex-direction: column;   /* stacks the links vertically */
