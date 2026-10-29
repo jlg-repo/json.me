@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!-- Modern HTML document -->
+<html lang="en">
+<!-- Root element, English -->
+<head>
+  <!-- Page information -->
+  <meta charset="UTF-8">
+  <!-- Character encoding -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Scale to the device width -->
+  <title>Jason Gentile | Personal Page</title>
+  <!-- TODO: put your own name in the title -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=VT323&amp;display=swap">
+  <!-- Pixel fonts: Press Start 2P for headings, VT323 for body text -->
+  <link rel="stylesheet" href="styles.css">
+  <!-- Connects your stylesheet -->
+   <script src="script.js" defer></script>
+  <!-- Loads your JavaScript after the HTML is parsed -->
+</head>
+<!-- End of head -->
+<body>
+  <!-- Visible content -->
+  <header>
+    <img class="avatar" src="images/avatar.svg" alt="Pixel-art portrait of Jason with brown hair and a blue shirt" width="128" height="128">
+    <!-- 16x16 sprite scaled up; CSS keeps the pixels crisp -->
+    <h1>Jason Gentile</h1>
+    <p>I am a passionate web developer with a love for creating engaging user experiences.</p>
+    <p class="press-start">&#9654; PRESS START</p>
+    <!-- Decorative blinking prompt -->
+  </header>
+  <!-- End of header -->
+  <div class="ticker" aria-hidden="true">
+    <!-- Scrolling banner; aria-hidden because it repeats content that is already on the page -->
+    <p>&#9733; WELCOME TO MY CORNER OF THE WEB &#9733; AI &#9733; OPERATING SYSTEMS &#9733; HUMAN-CENTERED COMPUTING &#9733; THANKS FOR VISITING &#9733;</p>
+  </div>
+  <!-- End of ticker -->
+  <nav>
+    <!-- TODO: add a ul with at least three links to sections on this page -->
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <!-- End of nav -->
+  <main>
+    <!-- TODO: add at least two section elements, each with an id and an h2 -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>Learn more about my background and interests.</p>
+      <table class="stats">
+        <!-- RPG-style character sheet -->
+        <caption>Character Stats</caption>
+        <thead>
+          <tr>
+            <th scope="col">Skill</th>
+            <th scope="col">Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Machine Learning</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617; 5</td></tr>
+          <tr><td>NLP &amp; RAG</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9617;&#9617; 5</td></tr>
+          <tr><td>Anomaly Detection</td><td>&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9617; 6</td></tr>
+          <tr><td>System Architecture</td><td>&#9608;&#9608;&#9608;&#9608;&#9617;&#9617;&#9617; 4</td></tr>
+          <tr><td>Web Development</td><td>&#9608;&#9608;&#9608;&#9617;&#9617;&#9617;&#9617; 3</td></tr>
+        </tbody>
+      </table>
+      <!-- End of stats table -->
+    </section>
+    <section id="projects">
+      <h2>Projects</h2>
+      <p>Explore my work on Novobot, the A/RED Rare Category Anomaly Detection Algorithm Graphical User Interface, the Archy programming language, and other projects.</p>
+      <ul>
+        <li><a href="Novobot.html">Novobot</a></li>
+        <li><a href="ARED.html">A/RED</a></li>
+        <li><a href="Archy.html">Archy</a></li>
+      </ul>
+    </section>
+    <section id="research">
+      <h2>Research</h2>
+      <p>Discover my research contributions and publications.</p>
+      <ul>
+        <li><a href="https://www.researchgate.net/profile/Jason-Gentile">ResearchGate</a></li>
+      </ul>
+    </section>
+    <section id="blog">
+      <h2>Blog</h2>
+      <p>Read my latest blog posts on cutting edge AI systems (ML, NLP, RAG, Agents, Anomaly Detection), operating systems (Omarchy, MacOSX), human-centered computing, system architecture, and economics.</p>
+    </section>
+    <!-- TODO: include an ordered or unordered list, an image with alt text, and either a table or a form -->
+    <section id="contact">
+      <h2>Sign My Guestbook</h2>
+      <p>Leave a message and say hi!</p>
+      <form id="message-form">
+        <!-- Ids match the Thursday starter so script.js can use this form -->
+        <label for="sender-name">Your name</label>
+        <input type="text" id="sender-name" name="sender_name" required>
+        <label for="sender-message">Message</label>
+        <textarea id="sender-message" name="sender_message" rows="4" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+      <!-- End of form -->
+      <p id="form-summary"></p>
+      <!-- Thursday: JavaScript writes a summary here -->
+    </section>
+  </main>
+  <!-- End of main -->
+  <footer>
+    <!-- TODO: add a footer with a link to your GitHub profile -->
+    <p>Connect with me on <a href="https://github.com/jlg-repo">GitHub</a></p>
+    <ul class="badges">
+      <!-- 88x31-style web badges, a classic personal-site touch -->
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>NO AI SLOP</li>
+      <li>BEST VIEWED 800&times;600</li>
+    </ul>
+    <p class="copyright">&copy; 2026 Jason Gentile &middot; Made with &#9829; and pixels</p>
+  </footer>
+  <!-- End of footer -->
+</body>
+<!-- End of body -->
+</html>
+<!-- End of document -->
